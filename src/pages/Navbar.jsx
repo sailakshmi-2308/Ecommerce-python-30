@@ -1,14 +1,123 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate=useNavigate()
+  const location = useLocation();
+
+  const [user, setUser] = useState(null);
+
+  function logout(){
+    localStorage.removeItem("admin");
+    setUser(null);
+    navigate("/login")
+
+  }
+
+  useEffect(() => {
+    const admin = JSON.parse(localStorage.getItem("admin"));
+    setUser(admin);
+  }, [location]);
+
   return (
-    <div>
-      <Link to="/">home</Link>
-    <Link to="/products">Products</Link>
-      <Link to="/cart">Cart</Link>
-      <Link to="login">Login</Link>
-        <Link to="/register">register</Link>
-    </div>
-  )
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+
+        <Link className="navbar-brand fw-bold" to="/">
+          Amazon
+        </Link>
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
+
+            {!user ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">
+                    Register
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    Login
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dashboard">
+                    Dashboard
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/products">
+                    Products
+                  </Link>
+                </li>
+
+                <li className="nav-item dropdown">
+                  <a
+                    href="#"
+                    className="nav-link dropdown-toggle"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    Admin
+                  </a>
+
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/add-product"
+                      >
+                        Add Product
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/admin-products"
+                      >
+                        Admin Products
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+
+                <li className="nav-item ms-lg-3">
+                  <button className="btn btn-danger" onClick={logout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
 }

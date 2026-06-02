@@ -8,6 +8,7 @@ import Products from './pages/Products'
 import Navbar from './pages/Navbar'
 import ProtectRoute from './pages/ProtectRoute'
 import VerifyOtp from './pages/VerifyOtp'
+import Dashboard from './pages/Dashboard'
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
 
 <Route path="/verify-otp" element={<VerifyOtp/>}/>
 
+<Route path="/dashboard" element={<Dashboard/>}/>
 </Routes>
    </BrowserRouter>
   )
