@@ -10,6 +10,9 @@ import ProtectRoute from './pages/ProtectRoute'
 import VerifyOtp from './pages/VerifyOtp'
 import Dashboard from './pages/Dashboard'
 import AddProduct from './pages/AddProduct'
+import AdminProducts from './pages/AdminProducts'
+import SingleProduct from './pages/SingleProduct'
+import EditProduct from './pages/EditProduct'
 
 export default function App() {
   return (
@@ -30,6 +33,9 @@ export default function App() {
 
 <Route path="/dashboard" element={<Dashboard/>}/>
 <Route path="/add-product" element={<AddProduct/>}/>
+<Route path="/admin-products" element={<AdminProducts/>}/>
+<Route path="/singleproduct/:id" element={<SingleProduct/>}/>
+<Route path="edit/:id" element={<EditProduct/>}/>
 </Routes>
    </BrowserRouter>
   )
