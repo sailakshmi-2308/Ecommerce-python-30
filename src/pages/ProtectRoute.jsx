@@ -4,10 +4,9 @@ import { Navigate, useNavigate } from 'react-router-dom'
 export default function ProtectRoute({children}) {
 
     const navigate=useNavigate()
-    const user= JSON.parse(localStorage.getItem("user"))
+    const admin= JSON.parse(localStorage.getItem("admin"))
 
-    if(!user){
-        return navigate("/login")
-    }
-  return  children
+    return admin?children:navigate("/login")
+
+   
 }
