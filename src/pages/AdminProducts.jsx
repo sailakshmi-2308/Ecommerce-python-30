@@ -78,7 +78,7 @@ export default function AdminProducts() {
                     View
                   </button>
 
-                  <button className="btn btn-warning flex-fill">
+                  <button className="btn btn-warning flex-fill" onClick={()=>navigate(`/edit/${item.itemid}`)}>
                     Edit
                   </button>
 

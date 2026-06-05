@@ -18,7 +18,7 @@ export default function SingleProduct() {
 
       setProduct(res.data.product);
     } catch (error) {
-      console.log(error);
+     console.log(error.response?.data || error.message)
     }
   }
 
